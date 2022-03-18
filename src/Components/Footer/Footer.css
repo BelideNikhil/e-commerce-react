@@ -1,0 +1,31 @@
+.footer-main {
+    width: 85%;
+    margin: var(--margin-large) auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.footer-content-wrapper > * {
+    margin-bottom: var(--margin-md);
+}
+.footer-actions > div {
+    display: flex;
+    flex-direction: column;
+}
+.footer-main .footer-actions button {
+    font-weight: var(--fw--semi-bold-500);
+    text-align: left;
+}
+.footer-main .contact-us i {
+    margin-right: var(--margin-sm);
+}
+
+@media screen and (max-width: 800px) {
+    .footer-main {
+        grid-template-columns: 1fr;
+    }
+    .footer-actions {
+        display: none;
+    }
+}
