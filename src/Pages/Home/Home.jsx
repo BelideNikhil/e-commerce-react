@@ -1,10 +1,5 @@
 import { useState } from "react";
-import Navbar from "../../Components/Navbar/Navbar";
-import NavAside from "../../Components/NavAside/NavAside";
-import HeroSection from "../../Components/HeroSection/HeroSection";
-import Categories from "../../Components/Categories/Categories";
-import BestSellers from "../../Components/BestSellers/BestSellers";
-import Footer from "../../Components/Footer/Footer";
+import { Navbar, NavAside, Categories, HeroSection, BestSellers, Footer } from "../../Components";
 export default function Home() {
     const [navToggle, setNavToggle] = useState(false);
 
