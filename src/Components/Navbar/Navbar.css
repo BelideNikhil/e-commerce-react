@@ -5,7 +5,7 @@
     background-color: var(--clr-whitesmoke);
     box-shadow: 0 0 4px rgb(0 0 0 / 30%);
     min-height: 4.5rem;
-    z-index: 1;
+    z-index: var(--z-index-10)
 }
 .header {
     width: 95%;

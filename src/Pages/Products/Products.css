@@ -1,0 +1,32 @@
+.product-grid {
+    display: grid;
+    grid-template-columns: 18rem 1fr;
+    width: 95%;
+    margin: 2rem auto 4rem auto;
+}
+.filter-mobile-actions {
+    background-color: var(--clr-whitesmoke);
+    width: 95%;
+    margin: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+.filter-mobile-actions button {
+    font-size: 1.2rem;
+    font-weight: var(--fw-bold-600);
+    text-align: center;
+    flex: 1;
+    padding: var(--padding-md);
+}
+@media screen and (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .filter-mobile-actions {
+        display: flex;
+        z-index: var(--z-index-6);
+    }
+}
