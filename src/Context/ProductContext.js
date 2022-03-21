@@ -1,6 +1,18 @@
-import axios from "axios";
 import { createContext, useContext, useReducer, useEffect } from "react";
 import { filterProductsFunction } from "../Helpers/FilterFunctions";
+import { actionTypes } from "./actionTypes";
+import { getProductList } from "../Services/getProductListService";
+const {
+    SORT_BY_PRICE,
+    SLIDER_PRICE_VALUE,
+    CATEGORY,
+    RATING,
+    EXCLUDE_OUT_OF_STOCK,
+    ONE_DAY_DELIVERY,
+    PRODUCTS_INITIAL_RENDER,
+    RESET_PRODUCT_FILTERS,
+} = actionTypes;
+
 const filters = {
     EXCLUDE_OUT_OF_STOCK: true,
     ONE_DAY_DELIVERY: false,
@@ -13,7 +25,7 @@ const initialProductState = { prodList: [], filters, filteredList: [] };
 const ProductContext = createContext();
 
 function commonFunction(state, currentFilter, payload) {
-    if (currentFilter === "CATEGORY") {
+    if (currentFilter === CATEGORY) {
         state = {
             ...state,
             filters: {
@@ -32,23 +44,24 @@ function commonFunction(state, currentFilter, payload) {
         filteredList: filterProductsFunction(state),
     };
 }
+
 function productReducerFun(productState, { type, payload }) {
     switch (type) {
-        case "SORT_BY_PRICE":
+        case SORT_BY_PRICE:
             return commonFunction(productState, type, payload.value);
-        case "SLIDER_PRICE_VALUE":
+        case SLIDER_PRICE_VALUE:
             return commonFunction(productState, type, payload.value);
-        case "RATING":
+        case RATING:
             return commonFunction(productState, type, payload.value);
-        case "CATEGORY":
+        case CATEGORY:
             return commonFunction(productState, type, payload);
-        case "EXCLUDE_OUT_OF_STOCK":
+        case EXCLUDE_OUT_OF_STOCK:
             return commonFunction(productState, type, payload.value);
-        case "ONE_DAY_DELIVERY":
+        case ONE_DAY_DELIVERY:
             return commonFunction(productState, type, payload.value);
-        case "INITIAL_RENDER":
+        case PRODUCTS_INITIAL_RENDER:
             return commonFunction({ filters, prodList: payload, filteredList: payload });
-        case "RESET_FILTERS":
+        case RESET_PRODUCT_FILTERS:
             return commonFunction({
                 filters,
                 prodList: productState.prodList,
@@ -64,13 +77,9 @@ function ProductProvider({ children }) {
 
     useEffect(() => {
         (async () => {
-            try {
-                const { data, status } = await axios.get("/api/products");
-                if (status === 200) {
-                    productDispatchFun({ type: "INITIAL_RENDER", payload: data.products });
-                }
-            } catch (err) {
-                console.log(err.message);
+            const data = await getProductList();
+            if(data){
+                productDispatchFun({ type: PRODUCTS_INITIAL_RENDER, payload: data })
             }
         })();
     }, []);

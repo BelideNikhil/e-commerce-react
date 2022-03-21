@@ -2,13 +2,12 @@ import "./Products.css";
 import { useState } from "react";
 import { FilterSection, ProductList } from "../../Components";
 import { useProduct } from "../../Context/ProductContext";
+import { actionTypes } from "../../Context/actionTypes";
+const { RESET_PRODUCT_FILTERS } = actionTypes;
 export default function Products() {
     const [toggleFilter, setToggleFilter] = useState(false);
     const { productDispatchFun } = useProduct();
-    function resetFiltersFunction() {
-        productDispatchFun({ type: "RESET_FILTERS" });
-        setToggleFilter(() => false);
-    }
+    
     return (
         <div className="product-grid">
             <FilterSection toggleFilter={toggleFilter} />
@@ -20,7 +19,7 @@ export default function Products() {
                     <button onClick={() => setToggleFilter(() => true)}>Filters</button>
                 )}
                 <div>|</div>
-                <button onClick={resetFiltersFunction}>Clear</button>
+                <button onClick={()=>productDispatchFun({ type: RESET_PRODUCT_FILTERS })}>Clear</button>
             </div>
         </div>
     );
