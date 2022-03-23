@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 import { filterProductsFunction } from "../Helpers/FilterFunctions";
 import { actionTypes } from "./actionTypes";
-import { getProductList } from "../Services/getProductListService";
+import { getProductList } from "../Services";
 const {
     SORT_BY_PRICE,
     SLIDER_PRICE_VALUE,
