@@ -21,7 +21,7 @@ export function signupErrorReducer(signupErrState, { type, payload }) {
         case SET_CONFIRM_PASSWORD_ERROR:
             return { ...signupErrState, confirmPasswordError: payload.error };
         case SET_AGREE_ERROR:
-            return { ...signupErrState, confirmPasswordError: payload.error };
+            return { ...signupErrState, agreeToError: payload.error };
         case RESET_SIGNUP_ERRORS:
             return { ...payload };
         default:

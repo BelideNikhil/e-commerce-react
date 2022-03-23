@@ -25,7 +25,6 @@ export function signupFormValidator(user,signupErrorDispatch) {
         errorFlag = true;
     }
     if (password === "" || !/^((?=.*\d)(?=.*[A-Z])(?=.*\W).{8,})$/.test(password)) {
-        console.log("password", password);
         signupErrorDispatch({
             type: SET_PASSWORD_ERROR,
             payload: {

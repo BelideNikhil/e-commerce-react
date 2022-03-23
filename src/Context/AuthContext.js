@@ -22,7 +22,7 @@ function authReducerFunction(authState, { type, payload }) {
             return authState;
     }
 }
-function lcStorgaeSetter(status, data) {
+function localStorageSetter(status, data) {
     if (status === 200 || status === 201) {
         localStorage.setItem("token", data.encodedToken);
         localStorage.setItem("isAuth", true);
@@ -38,11 +38,11 @@ function AuthProvider({ children }) {
     const userLoginHandler = async (userData) => {
         const { status, data } = await getLoginDetails(userData);
         if (status === 200) {
-            lcStorgaeSetter(200, data);
+            localStorageSetter(200, data);
             authDispatchFuntion({ type: "SET_AUTH", payload: { auth: true, userData: data.foundUser } });
             navigate("/")
         } else {
-            lcStorgaeSetter(status);
+            localStorageSetter(status);
             authDispatchFuntion({ type: "SET_LOGIN_ERROR", payload: { auth: false, error: data.errors[0] } });
         }
     };
@@ -51,11 +51,11 @@ function AuthProvider({ children }) {
         const { status, data } =await getSignupDetails(newUserData);
         console.log(status,data,"signup")
         if (status === 201) {
-            lcStorgaeSetter(status, data);
+            localStorageSetter(status, data);
             authDispatchFuntion({ type: "SET_AUTH", payload: { auth: true, userData: data.createdUser } });
             navigate("/")
         } else {
-            lcStorgaeSetter(status);
+            localStorageSetter(status);
             authDispatchFuntion({ type: "SET_SIGNUP_ERROR", payload: { auth: false, error: data.errors } });
         }
     };

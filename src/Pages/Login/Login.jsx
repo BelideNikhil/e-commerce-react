@@ -49,6 +49,7 @@ export default function Login() {
                         />
                         <button
                             className="btn-icon btn-icon-sm input-toggle-btn"
+                            type="button"
                             onClick={() => setTogglePassword((prev) => !prev)}
                         >
                             <i className={togglePassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
