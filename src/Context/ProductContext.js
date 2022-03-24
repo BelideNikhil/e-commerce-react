@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer, useEffect, useState } from "react";
 import { filterProductsFunction } from "../Helpers/FilterFunctions";
 import { actionTypes } from "./actionTypes";
 import { getProductList } from "../Services";
@@ -21,7 +21,7 @@ const filters = {
     RATING: 1,
     SLIDER_PRICE_VALUE: 9999,
 };
-const initialProductState = { prodList: [], filters, filteredList: [] };
+const initialProductState = { prodList: [], filters, filteredList: [], featuredList: [] };
 const ProductContext = createContext();
 
 function commonFunction(state, currentFilter, payload) {
@@ -74,17 +74,23 @@ function productReducerFun(productState, { type, payload }) {
 
 function ProductProvider({ children }) {
     const [productState, productDispatchFun] = useReducer(productReducerFun, initialProductState);
-
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
+        setIsLoading(true);
         (async () => {
-            const data = await getProductList();
-            if(data){
-                productDispatchFun({ type: PRODUCTS_INITIAL_RENDER, payload: data })
+            const { status, data } = await getProductList();
+            if (status === 200) {
+                productDispatchFun({ type: PRODUCTS_INITIAL_RENDER, payload: data.products });
+                setIsLoading(false);
             }
         })();
     }, []);
 
-    return <ProductContext.Provider value={{ productState, productDispatchFun }}>{children}</ProductContext.Provider>;
+    return (
+        <ProductContext.Provider value={{ productState, productDispatchFun, isLoading }}>
+            {children}
+        </ProductContext.Provider>
+    );
 }
 
 function useProduct() {

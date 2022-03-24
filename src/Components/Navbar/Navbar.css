@@ -2,14 +2,19 @@
     position: sticky;
     top: 0;
     width: 100%;
+    margin: auto;
     background-color: var(--clr-whitesmoke);
     box-shadow: 0 0 4px rgb(0 0 0 / 30%);
     min-height: 4.5rem;
-    z-index: var(--z-index-10)
+    z-index: var(--z-index-10);
 }
 .header {
     width: 95%;
     margin: auto;
+}
+.header .btn {
+    padding: var(--padding-sm);
+    font-size: 1rem;
 }
 .header-logo {
     color: var(--clr-black);
@@ -45,11 +50,13 @@
     display: none;
     display: none;
 }
-@media screen and (max-width: 800px) {
+
+@media screen and (max-width: 900px) {
     .header {
         width: 100%;
     }
     .nav-search-web,
+    .nav-shop-btn,
     .nav-wishlist-btn {
         display: none;
     }

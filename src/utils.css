@@ -7,6 +7,7 @@
     --fs-xl: 32px;
 
     --border-radius: 4px;
+    --z-index-4: 4; /* scroll to top*/
     --z-index-5: 5; /*product filter*/
     --z-index-6: 6; /*mobile filter buttons*/
     --z-index-10: 10; /* navbar*/
@@ -20,7 +21,7 @@
 .mt-16 {
     margin-top: 1rem;
 }
-.mt-24{
+.mt-24 {
     margin-top: 1.5rem;
 }
 .mr-8 {
@@ -63,7 +64,7 @@ mx-8 {
 .pa-16 {
     padding: 1rem;
 }
-.pa-24{
+.pa-24 {
     padding: 1.5rem;
 }
 
@@ -71,7 +72,16 @@ mx-8 {
 .overflow-y-hidden {
     overflow-y: hidden;
 }
-
+.flex-row-center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-clmn-center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .title {
     font-size: 2rem;
     font-weight: var(--fw--semi-bold-500);
@@ -100,15 +110,17 @@ mx-8 {
     top: 8px;
     left: -4px;
 }
-.card-badge .best-seller {
-    background-color: var(--clr-primary);
-    color: whitesmoke;
+.card-with-badge .card-badge {
+    color: var(--clr-whitesmoke);
     border: none;
-    font-weight: var(--fw-bold-600);
+    font-weight: var(--fw--semibold-500);
+}
+.card-badge .best-seller {
+    background-color: #da4b59;
+    color: var(--clr-whitesmoke);
 }
 .card-badge .new-arrival {
-    background-color: rgb(201, 50, 80);
-    color: var(--clr-whitesmoke);
+    background-color: #df5a20;
 }
 /* user form styles  */
 .user-form {

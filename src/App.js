@@ -1,5 +1,5 @@
 import "./utils.css";
-import { Navbar, NavAside, Footer } from "./Components/index";
+import { Navbar, NavAside, Footer, ScrollToTop } from "./Components/index";
 import PageRoutes from "./Routes/PageRoutes";
 import { useNav } from "./CustomHooks/useNav";
 export default function App() {
@@ -8,6 +8,7 @@ export default function App() {
         <div className="App">
             <NavAside navToggle={navToggle} asideToggleFunction={asideToggleFunction} setNavToggle={setNavToggle} />
             <Navbar asideToggleFunction={asideToggleFunction} />
+            <ScrollToTop />
             <PageRoutes />
             <Footer />
         </div>

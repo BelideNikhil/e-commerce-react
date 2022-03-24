@@ -1,11 +1,11 @@
-import {Categories, HeroSection, BestSellers } from "../../Components";
+import { Categories, HeroSection, Featured } from "../../Components";
 export default function Home() {
     return (
         <>
             <HeroSection />
-            <div className="title mx-12">Best Sellers</div>
-            <BestSellers />
-            <div className="title mx-12">Shop by Categories</div>
+            <div className="title mx-12">Featured</div>
+            <Featured />
+            <div className="title mx-12">Categories</div>
             <Categories />
             <div className="spacer-two"></div>
         </>

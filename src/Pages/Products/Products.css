@@ -6,11 +6,12 @@
 }
 .filter-mobile-actions {
     background-color: var(--clr-whitesmoke);
-    width: 95%;
-    margin: auto;
+    z-index: var(--z-index-6);
+    width: 100%;
     position: fixed;
     bottom: 0;
     left: 0;
+    box-shadow: var(--box-shadow-light);
     display: none;
 }
 .filter-mobile-actions button {
@@ -27,6 +28,5 @@
     }
     .filter-mobile-actions {
         display: flex;
-        z-index: var(--z-index-6);
     }
 }
