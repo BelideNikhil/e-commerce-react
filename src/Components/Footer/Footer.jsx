@@ -1,5 +1,5 @@
 import "./Footer.css";
-
+import { Link } from "react-router-dom";
 export default function Footer() {
     return (
         <footer className="footer-main">
@@ -40,8 +40,12 @@ export default function Footer() {
             <div className="footer-actions footer-content-wrapper">
                 <h2>Account</h2>
                 <div>
-                    <button className="mb-12 primary-accent">My Account</button>
-                    <button className="mb-12 primary-accent">Wishlist</button>
+                    <Link to="/profile">
+                        <button className="mb-12 primary-accent">My Account</button>
+                    </Link>
+                    <Link to="/wishlist">
+                        <button className="mb-12 primary-accent">Wishlist</button>
+                    </Link>
                     <button className="mb-12 primary-accent">Manage Address</button>
                     <button className="mb-12 primary-accent">Privacy Policy</button>
                 </div>

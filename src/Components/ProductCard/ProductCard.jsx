@@ -1,12 +1,12 @@
 import "./ProductCard.css";
 
 export default function ProductCard({ card }) {
-    const { title, description, source, alt, rating, price, outOfStock } = card;
+    const { title, description, source, alt, rating, price, outOfStock, badgeText } = card;
     if (outOfStock) {
         console.log(outOfStock, title);
     }
     return (
-        <div className={`product-card card card-with-icon ${outOfStock ? "card-overlay" : ''}`}>
+        <div className={`product-card card card-with-icon card-with-badge  ${outOfStock ? "card-overlay" : ""}`}>
             <div className="card-image">
                 <img src={source} alt={alt} />
             </div>
@@ -45,13 +45,24 @@ export default function ProductCard({ card }) {
                         </span>
                     </div>
                 </div>
+
                 <div className="card-actions">
                     <button className="btn btn-solid-primary"> Add to cart</button>
                 </div>
             </div>
-            {outOfStock?<div class="card-overlay-content">
-                <span>Out of Stock</span>
-            </div>:null}
+            {badgeText ? (
+                <div className="card-badge">
+                    <span className={badgeText}>
+                        <i className="fas fa-fire"></i>
+                        {badgeText}
+                    </span>
+                </div>
+            ) : null}
+            {outOfStock ? (
+                <div class="card-overlay-content">
+                    <span>Out of Stock</span>
+                </div>
+            ) : null}
         </div>
     );
 }
