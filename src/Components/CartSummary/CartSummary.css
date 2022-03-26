@@ -1,0 +1,19 @@
+.cart-summary {
+    width: 100%;
+    max-width: 34rem;
+    border: 1px solid var(--clr-primary-faded);
+    border-radius: var(--border-radius);
+    padding: var(--padding-md);
+    box-shadow: var(--box-shadow-light);
+}
+.cart-summary > * {
+    margin-bottom: var(--margin-xs);
+}
+.cart-summary i {
+    margin-right: var(--margin-xs);
+}
+.cart-summary ~ .btn {
+    width: 100%;
+    max-width: 34rem;
+    margin: var(--margin-sm) 0;
+}
