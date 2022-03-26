@@ -13,7 +13,14 @@
     --z-index-10: 10; /* navbar*/
     --z-index-11: 11; /*nav aside*/
 }
-
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.child-wrapper {
+    flex-grow: 1;
+}
 /* margin utils */
 .mt-8 {
     margin-top: 0.5rem;

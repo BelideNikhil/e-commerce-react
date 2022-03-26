@@ -1,8 +1,22 @@
 import "./Navbar.css";
 import "../../utils.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavSearch from "./NavSearch";
+import { useAuth } from "../../Context/AuthContext";
+import { useCart } from "../../Context/CartContext";
+import { useWishlist } from "../../Context/WishlistContext";
 export default function Navbar({ asideToggleFunction }) {
+    const {
+        authState: { isAuth },
+        logoutHandler,
+    } = useAuth();
+    const {
+        cartState: { cartList },
+    } = useCart();
+    const {
+        wishlistState: { wishList },
+    } = useWishlist();
+    const navigate = useNavigate();
     return (
         <div className="header-wrapper pa-8 ">
             <header className="header pa-8 flex-row-spc-btw">
@@ -26,20 +40,15 @@ export default function Navbar({ asideToggleFunction }) {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/profile">
-                                <button className="btn-icon">
-                                    <i className="fas fa-user-alt"></i>
-                                </button>
-                            </Link>
-                        </li>
-                        <li>
                             <div className="badge-container nav-wishlist-btn">
                                 <Link to="wishlist">
                                     <button className="btn-icon">
                                         <i className="fas fa-heart"></i>
                                     </button>
                                 </Link>
-                                <span className="badge-icon badge-icon-primary">4</span>
+                                {isAuth === true && wishList?.length > 0 ? (
+                                    <span className="badge-icon badge-icon-primary">{wishList.length}</span>
+                                ) : null}
                             </div>
                         </li>
                         <li>
@@ -49,8 +58,15 @@ export default function Navbar({ asideToggleFunction }) {
                                         <i className="fas fa-shopping-cart"></i>
                                     </button>
                                 </Link>
-                                <span className="badge-icon badge-icon-primary">1</span>
+                                {isAuth === true && cartList?.length > 0 ? (
+                                    <span className="badge-icon badge-icon-primary">{cartList.length}</span>
+                                ) : null}
                             </div>
+                        </li>
+                        <li>
+                            <button className="btn-icon" onClick={isAuth ? logoutHandler : () => navigate("/login")}>
+                                <i className={`fas fa-sign-${isAuth ? "out" : "in"}-alt`}></i>
+                            </button>
                         </li>
                     </ul>
                 </nav>
