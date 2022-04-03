@@ -31,7 +31,7 @@ export default function CartCard({ card }) {
                     >
                         <i className="fas fa-minus"></i>
                     </button>
-                    <strong className="ma-8">{qty}</strong>
+                    <b className="ma-8">{qty}</b>
                     <button
                         className="btn-icon btn-icon-sm"
                         disabled={cartLoading}

@@ -1,6 +1,5 @@
 import { createContext, useReducer, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { getLoginDetails, getSignupDetails } from "../Services/";
 
 const AuthContext = createContext();
@@ -25,7 +24,6 @@ function authReducerFunction(authState, { type, payload }) {
         case "SET_SIGNUP_ERROR":
             return { ...authState, isAuth: payload.auth, signupError: payload.error };
         case "SET_AUTH_RENDER":
-            console.log(payload);
             return { isAuth: payload.auth, token: payload.token, signupError: "", loginError: "" };
         case "SET_AUTH_LOGOUT":
             return { isAuth: false, token: "", signupError: "", loginError: "" };

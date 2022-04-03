@@ -30,16 +30,15 @@ function WishlistProvider({ children }) {
         if (isAuth === true && found === undefined) {
             setIsLoading(true);
             (async function () {
-                try {
-                    const { status, data } = await addToWishlistService(currentCard, token);
-                    if (status === 201) {
-                        wishlistDispatchFunction({
-                            type: "UPDATE_WISHLIST",
-                            payload: { wishList: data.wishlist },
-                        });
-                        setIsLoading(false);
-                    }
-                } catch (err) {
+                const { status, data } = await addToWishlistService(currentCard, token);
+                if (status === 201) {
+                    wishlistDispatchFunction({
+                        type: "UPDATE_WISHLIST",
+                        payload: { wishList: data.wishlist },
+                    });
+                    setIsLoading(false);
+                } else {
+                    console.log(data);
                     setError(data.message);
                     setIsLoading(false);
                 }
