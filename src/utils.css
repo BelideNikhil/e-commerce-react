@@ -43,7 +43,7 @@
 .mb-12 {
     margin-bottom: 0.75rem;
 }
-mx-8 {
+.mx-8 {
     margin: 0.5rem 0;
 }
 .mx-12 {
@@ -167,6 +167,11 @@ mx-8 {
 
 .signup-wrapper {
     margin: 2rem auto;
+}
+.not-found-wrapper {
+    height: 50vh;
+    width: 85%;
+    margin: auto;
 }
 @media screen and (max-width: 500px) {
     .title {

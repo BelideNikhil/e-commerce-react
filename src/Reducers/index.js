@@ -1,3 +1,5 @@
 import { signupErrorReducer } from "./SignupErrorReducer";
 import { SignupUserReducer } from "./SignupUserReducer";
-export {signupErrorReducer,SignupUserReducer}
+import { cartReducerFunction } from "./cartReducer";
+import { wishlistReducerFunction } from "./wishlistReducer";
+export { signupErrorReducer, SignupUserReducer, cartReducerFunction, wishlistReducerFunction };
