@@ -1,44 +1,34 @@
 import { createContext, useContext, useReducer, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { addToWishlistService, deleteWishlistService, getWishlistService } from "../Services";
+import { wishlistReducerFunction } from "../Reducers/index";
+import toast from "react-hot-toast";
 
 const WishlistContext = createContext();
 
-function wishlistReducer(wishlistState, { type, payload }) {
-    switch (type) {
-        case "WISHLIST_RENDER":
-            return { ...wishlistState, wishList: payload.wishList };
-        case "UPDATE_WISHLIST":
-            return { ...wishlistState, wishList: payload.wishList };
-        default:
-            return wishlistState;
-    }
-}
 function WishlistProvider({ children }) {
-    const [wishlistState, wishlistDispatchFunction] = useReducer(wishlistReducer, { wishList: [] });
+    const [wishlistState, wishlistDispatchFunction] = useReducer(wishlistReducerFunction, { wishList: [] });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
-    const navigate = useNavigate();
     const {
         authState: { isAuth, token },
     } = useAuth();
     function addToWishList(currentCard) {
-        const found = wishlistState.wishList.find((each) => {
-            return each._id === currentCard._id;
-        });
+        const found = wishlistState.wishList.find((each) => each._id === currentCard._id);
         if (isAuth === true && found === undefined) {
+            const toastId = toast.loading("Adding...");
             setIsLoading(true);
             (async function () {
                 const { status, data } = await addToWishlistService(currentCard, token);
                 if (status === 201) {
+                    toast.success("Added to Wishlist", { id: toastId });
                     wishlistDispatchFunction({
                         type: "UPDATE_WISHLIST",
                         payload: { wishList: data.wishlist },
                     });
                     setIsLoading(false);
                 } else {
-                    console.log(data);
+                    toast.error("Error Occured, Try Again.", { id: toastId });
                     setError(data.message);
                     setIsLoading(false);
                 }
@@ -48,6 +38,7 @@ function WishlistProvider({ children }) {
     function removeFromWishlist(card) {
         if (isAuth === true) {
             setIsLoading(true);
+            const toastId = toast.loading("Deleting...");
             (async function () {
                 const { status, data } = await deleteWishlistService(card._id, token);
                 if (status === 200) {
@@ -55,8 +46,10 @@ function WishlistProvider({ children }) {
                         type: "UPDATE_WISHLIST",
                         payload: { wishList: data.wishlist },
                     });
+                    toast.success("Deleted From Wishlist", { id: toastId });
                     setIsLoading(false);
                 } else {
+                    toast.error("Error Occured, Try Again.", { id: toastId });
                     setError(data.message);
                     setIsLoading(false);
                 }

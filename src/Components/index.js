@@ -9,6 +9,7 @@ import FilterSection from "./FilterSection/FilterSection";
 import Loading from "./Loading/Loading";
 import ResetScrollbar from "./ResetScrollBar/ResetScrollBar";
 import ScrollToTop from "./ScrollToTop/ScrollToTop";
+import ToastWrapper from "./ToastWrapper/ToastWrapper";
 export {
     Navbar,
     NavAside,
@@ -21,4 +22,5 @@ export {
     Loading,
     ResetScrollbar,
     ScrollToTop,
+    ToastWrapper,
 };

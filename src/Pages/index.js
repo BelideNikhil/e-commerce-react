@@ -5,4 +5,5 @@ import Signup from "./Signup/Signup";
 import Cart from "./Cart/Cart";
 import Wishlist from "./Wishlist/Wishlist";
 import Profile from "./Profile/Profile";
-export { Home, Products, Login, Signup, Cart, Wishlist, Profile };
+import NotFound from "./NotFound/NotFound";
+export { Home, Products, Login, Signup, Cart, Wishlist, Profile, NotFound };
