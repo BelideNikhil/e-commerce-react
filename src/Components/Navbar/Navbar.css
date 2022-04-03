@@ -2,7 +2,7 @@
     position: sticky;
     top: 0;
     width: 100%;
-    margin: auto;
+    margin: 0 auto;
     background-color: var(--clr-whitesmoke);
     box-shadow: 0 0 4px rgb(0 0 0 / 30%);
     min-height: 4.5rem;

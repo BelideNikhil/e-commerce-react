@@ -10,33 +10,35 @@ export default function PageRoutes() {
         authState: { isAuth },
     } = useAuth();
     return (
-        <ResetScrollbar>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/products" element={<Products />} />
-                <Route element={<PrivateRoute />}>
-                    <Route path="/cart" element={<Cart />} />
-                </Route>
-                <Route element={<PrivateRoute />}>
-                    <Route path="/wishlist" element={<Wishlist />} />
-                </Route>
-                <Route element={<PrivateRoute />}>
-                    <Route path="/profile" element={<Profile />} />
-                </Route>
-                {!isAuth ? (
-                    <>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/signup" element={<Signup />} />
-                    </>
-                ) : (
-                    <>
-                        <Route path="/login" element={<Navigate to="/" />} />
-                        <Route path="/signup" element={<Navigate to="/" />} />
-                    </>
-                )}
-                <Route path="*" element={<Navigate replace to="/" />} />
-                <Route path="/mock" element={<Mockman />} />
-            </Routes>
-        </ResetScrollbar>
+        <div className="child-wrapper">
+            <ResetScrollbar>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route element={<PrivateRoute />}>
+                        <Route path="/cart" element={<Cart />} />
+                    </Route>
+                    <Route element={<PrivateRoute />}>
+                        <Route path="/wishlist" element={<Wishlist />} />
+                    </Route>
+                    <Route element={<PrivateRoute />}>
+                        <Route path="/profile" element={<Profile />} />
+                    </Route>
+                    {!isAuth ? (
+                        <>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<Signup />} />
+                        </>
+                    ) : (
+                        <>
+                            <Route path="/login" element={<Navigate to="/" />} />
+                            <Route path="/signup" element={<Navigate to="/" />} />
+                        </>
+                    )}
+                    <Route path="/*" element={<Navigate replace to="/" />} />
+                    <Route path="/mock" element={<Mockman />} />
+                </Routes>
+            </ResetScrollbar>
+        </div>
     );
 }

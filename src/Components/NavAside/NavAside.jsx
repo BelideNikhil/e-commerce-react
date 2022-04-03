@@ -1,6 +1,15 @@
 import "./NavAside.css";
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 export default function NavAside({ navToggle, asideToggleFunction, setNavToggle }) {
+    const {
+        authState: { isAuth },
+    } = useAuth();
+    const navigate = useNavigate();
+    function asideNavigate(navigateTo) {
+        navigate(navigateTo);
+        asideToggleFunction();
+    }
     return (
         <div>
             <div
@@ -18,10 +27,43 @@ export default function NavAside({ navToggle, asideToggleFunction, setNavToggle 
                         </button>
                     </div>
                     <div className="flex-clmn-center-center nav-aside-actions">
-                        <button className="btn btn-txt-underline-primary">Home</button>
-                        <button className="btn btn-txt-underline-primary">Products</button>
-                        <button className="btn btn-txt-underline-primary">Login</button>
-                        <button className="btn btn-txt-underline-primary">Sign Up</button>
+                        <button className="btn btn-txt-underline-primary" onClick={() => asideNavigate("/")}>
+                            Home
+                        </button>
+                        <button className="btn btn-txt-underline-primary" onClick={() => asideNavigate("/products")}>
+                            Products
+                        </button>
+                        {!isAuth ? (
+                            <>
+                                <button
+                                    className="btn btn-txt-underline-primary"
+                                    onClick={() => asideNavigate("/login")}
+                                >
+                                    Login
+                                </button>
+                                <button
+                                    className="btn btn-txt-underline-primary"
+                                    onClick={() => asideNavigate("/signup")}
+                                >
+                                    Sign Up
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <button
+                                    className="btn btn-txt-underline-primary"
+                                    onClick={() => asideNavigate("/wishlist")}
+                                >
+                                    Wishlist
+                                </button>
+                                <button
+                                    className="btn btn-txt-underline-primary"
+                                    onClick={() => asideNavigate("/cart")}
+                                >
+                                    Cart
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
             ) : null}
