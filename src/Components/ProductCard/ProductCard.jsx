@@ -1,8 +1,7 @@
 import "./ProductCard.css";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../Context/CartContext";
-import { useWishlist } from "../../Context/WishlistContext";
-import { useAuth } from "../../Context/AuthContext";
+import { useCart, useWishlist, useAuth } from "../../Context";
+
 export default function ProductCard({ card }) {
     const { title, description, source, alt, rating, price, outOfStock, badgeText, discountPercent } = card;
     const actualPrice = Math.ceil(price + (discountPercent / 100) * price);
@@ -24,7 +23,12 @@ export default function ProductCard({ card }) {
     const foundInWishlist = wishList?.find((each) => each._id === card._id);
     const navigate = useNavigate();
     return (
-        <div className={`product-card card card-with-icon card-with-badge  ${outOfStock ? "card-overlay" : ""}`}>
+        <div
+            className={`product-card card card-with-icon card-with-badge  ${
+                outOfStock ? "card-overlay out-of-stock" : ""
+            } `}
+            onClick={() => navigate(`${card.id}`)}
+        >
             <div className="card-image">
                 <img src={source} alt={alt} />
             </div>
@@ -32,9 +36,14 @@ export default function ProductCard({ card }) {
                 <button
                     className="btn-icon btn-icon-sm btn-icon-primary"
                     disabled={wishlistLoading}
-                    onClick={() =>
-                        isAuth ? (foundInWishlist ? removeFromWishlist(card) : addToWishList(card)) : navigate("/login")
-                    }
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        isAuth
+                            ? foundInWishlist
+                                ? removeFromWishlist(card)
+                                : addToWishList(card)
+                            : navigate("/login");
+                    }}
                 >
                     <i className={`${isAuth === true && foundInWishlist ? "fas" : "far"} fa-heart`}></i>
                 </button>
@@ -73,9 +82,10 @@ export default function ProductCard({ card }) {
                     <button
                         className="btn btn-solid-primary"
                         disabled={cartLoading}
-                        onClick={() =>
-                            isAuth ? (foundInCart ? navigate("/cart") : addToCartHandler(card)) : navigate("/login")
-                        }
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            isAuth ? (foundInCart ? navigate("/cart") : addToCartHandler(card)) : navigate("/login");
+                        }}
                     >
                         {isAuth === true && foundInCart ? "Go" : "Add"} to cart
                     </button>

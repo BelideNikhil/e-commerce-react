@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer, useEffect, useState } from "react";
+import { filterBySearchFunction } from "../Helpers/filterBySearch";
 import { filterProductsFunction } from "../Helpers/FilterFunctions";
 import { actionTypes } from "./actionTypes";
 import { getProductList } from "../Services";
@@ -12,7 +13,7 @@ const {
     PRODUCTS_INITIAL_RENDER,
     RESET_PRODUCT_FILTERS,
 } = actionTypes;
-
+const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 const filters = {
     EXCLUDE_OUT_OF_STOCK: true,
     ONE_DAY_DELIVERY: false,
@@ -21,7 +22,13 @@ const filters = {
     RATING: 1,
     SLIDER_PRICE_VALUE: 9999,
 };
-const initialProductState = { prodList: [], filters, filteredList: [], featuredList: [] };
+const initialProductState = {
+    prodList: [],
+    filters,
+    filteredList: [],
+    featuredList: [],
+    searchedList: [],
+};
 const ProductContext = createContext();
 
 function commonFunction(state, currentFilter, payload) {
@@ -44,10 +51,10 @@ function commonFunction(state, currentFilter, payload) {
         filteredList: filterProductsFunction(state),
     };
 }
-
 function productReducerFun(productState, { type, payload }) {
     switch (type) {
         case SORT_BY_PRICE:
+            console.log(productState, type, payload.value);
             return commonFunction(productState, type, payload.value);
         case SLIDER_PRICE_VALUE:
             return commonFunction(productState, type, payload.value);
@@ -60,13 +67,19 @@ function productReducerFun(productState, { type, payload }) {
         case ONE_DAY_DELIVERY:
             return commonFunction(productState, type, payload.value);
         case PRODUCTS_INITIAL_RENDER:
-            return commonFunction({ filters, prodList: payload, filteredList: payload });
+            return commonFunction({ filters, prodList: payload, filteredList: payload, searchedList: payload });
         case RESET_PRODUCT_FILTERS:
-            return commonFunction({
+            const value = commonFunction({
                 filters,
                 prodList: productState.prodList,
                 filteredList: productState.filteredList,
+                searchedList: productState.prodList,
             });
+            return { ...productState, ...value };
+        case SEARCH_PRODUCTS:
+            let filteredSearchList = filterBySearchFunction(productState.prodList, payload.searchValue);
+            productState = { ...productState, searchedList: filteredSearchList };
+            return commonFunction(productState, type, payload);
         default:
             return productState;
     }
