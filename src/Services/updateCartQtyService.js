@@ -3,7 +3,7 @@ import axios from "axios";
 export async function updateCartQtyService(id, type, token) {
     try {
         const response = await axios.post(
-            `api/user/cart/${id}`,
+            `/api/user/cart/${id}`,
             {
                 action: {
                     type,

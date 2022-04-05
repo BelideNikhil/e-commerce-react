@@ -3,7 +3,7 @@ import axios from "axios";
 export async function addToCartService(currentCard, token) {
     try {
         const response = await axios.post(
-            `api/user/cart`,
+            `/api/user/cart`,
             { product: currentCard },
             { headers: { authorization: token } }
         );
