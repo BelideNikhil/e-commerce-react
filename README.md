@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://ninty-seven-x-store.netlify.app/">
-    <img src="" alt="offroad-logo" width="800">
+    <img src="https://raw.githubusercontent.com/BelideNikhil/gifstorage/master/e-comm-react-assets/e-comm-hero.png" alt="offroad-logo" width="900">
   </a>
 </p>
 
@@ -66,9 +66,9 @@
 
 + Single product with description
 
-### Other Features
-
 ---
+
+### Other Features
 
 + Search products 
 + Scroll to Top Button
@@ -79,6 +79,7 @@
 
    + Guest Email: test@gmail.com
    + Guest Password: password123
+---
 
 ### Made Using
 
@@ -89,6 +90,7 @@
    + #### [maqUI](https://maq-ui.netlify.app/)
 ---
 
+![](https://github.com/BelideNikhil/gifstorage/blob/master/e-comm-react-assets/react-e-comm-gif.gif)
 
 ---
 <p align="center">by Nikhil Belide</p>
