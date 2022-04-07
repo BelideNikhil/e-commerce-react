@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Home, Products, Login, Signup, Cart, Wishlist, Profile, NotFound } from "../Pages";
+import { Home, Products, Login, Signup, Cart, Wishlist, Profile, NotFound, SingleProduct } from "../Pages";
 import { ResetScrollbar } from "../Components/";
 import PrivateRoute from "./PrivateRoute";
 import Mockman from "mockman-js";
@@ -15,6 +15,7 @@ export default function PageRoutes() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/products" element={<Products />} />
+                    <Route path="/products/:id" element={<SingleProduct />} />
                     <Route element={<PrivateRoute />}>
                         <Route path="/cart" element={<Cart />} />
                     </Route>

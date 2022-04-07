@@ -27,3 +27,8 @@
 .product-card .rating-container i {
     margin-left: 4px;
 }
+
+/* out of stock */
+.card.out-of-stock {
+    cursor: not-allowed;
+}

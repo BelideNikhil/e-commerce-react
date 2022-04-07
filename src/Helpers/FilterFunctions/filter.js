@@ -1,7 +1,7 @@
 import { sortByPrice, priceRangeFunction, filterByRating, filterByCategories } from "./index";
 
-export function filterProductsFunction({ prodList, filters }) {
-    let filteredByCategory = filterByCategories(prodList, filters);
+export function filterProductsFunction({ filters, searchedList }) {
+    let filteredByCategory = filterByCategories(searchedList, filters);
     let filteredByPriceValue = priceRangeFunction(filteredByCategory, filters);
     let sortedBy = sortByPrice(filteredByPriceValue, filters);
     let ratedBy = filterByRating(sortedBy, filters);

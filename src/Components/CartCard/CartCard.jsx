@@ -1,11 +1,14 @@
 import "./CartCard.css";
 import { useCart } from "../../Context/CartContext";
+import { useNavigate } from "react-router-dom";
+
 export default function CartCard({ card }) {
     const { _id, title, source, alt, price, description, qty, discountPercent } = card;
     const { updateQtyHandler, deleteFromCartHandler, moveToWishlist, isLoading: cartLoading } = useCart();
+    const navigate = useNavigate();
     const actualPrice = Math.ceil(price + (discountPercent / 100) * price);
     return (
-        <div className="card cart-card card-with-icon">
+        <div className="card cart-card card-with-icon" onClick={() => navigate(`/products/${card.id}`)}>
             <div className="card-image">
                 <img src={source} alt={alt} />
             </div>
@@ -13,7 +16,10 @@ export default function CartCard({ card }) {
                 <button
                     className="btn-icon btn-icon-sm"
                     disabled={cartLoading}
-                    onClick={() => deleteFromCartHandler(_id)}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        deleteFromCartHandler(_id);
+                    }}
                 >
                     <i className="fas fa-times"></i>
                 </button>
@@ -27,7 +33,10 @@ export default function CartCard({ card }) {
                     <button
                         className="btn-icon btn-icon-sm"
                         disabled={cartLoading}
-                        onClick={() => (qty === 1 ? deleteFromCartHandler(_id) : updateQtyHandler(_id, "decrement"))}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            return qty === 1 ? deleteFromCartHandler(_id) : updateQtyHandler(_id, "decrement");
+                        }}
                     >
                         <i className="fas fa-minus"></i>
                     </button>
@@ -35,7 +44,10 @@ export default function CartCard({ card }) {
                     <button
                         className="btn-icon btn-icon-sm"
                         disabled={cartLoading}
-                        onClick={() => updateQtyHandler(_id, "increment")}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            updateQtyHandler(_id, "increment");
+                        }}
                     >
                         <i className="fas fa-plus"></i>
                     </button>
@@ -61,7 +73,10 @@ export default function CartCard({ card }) {
                     <button
                         className="btn btn-outline-primary"
                         disabled={cartLoading}
-                        onClick={() => moveToWishlist(card)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            moveToWishlist(card);
+                        }}
                     >
                         Move to Wishlist
                     </button>

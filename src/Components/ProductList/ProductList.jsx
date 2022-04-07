@@ -12,11 +12,14 @@ export default function ProductList() {
             {isLoading ? (
                 <Loading />
             ) : (
-                <div className="product-section">
-                    {filteredList?.map((each) => {
-                        return <ProductCard key={each._id} card={each} />;
-                    })}
-                </div>
+                <>
+                    <div className="product-section">
+                        {filteredList?.map((each) => {
+                            return <ProductCard key={each._id} card={each} />;
+                        })}
+                    </div>
+                    {!filteredList.length ? <div className="title">No Products Found</div> : null}
+                </>
             )}
         </div>
     );
