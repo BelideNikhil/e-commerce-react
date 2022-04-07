@@ -45,7 +45,10 @@
     font-size: 0.9rem;
     font-weight: var(--fw--semi-bold-500);
 }
-
+.clear-filter-btn:active {
+    transform: scale(0.95);
+    transition: 0.1ms ease-in-out;
+}
 /* hide scrollbar */
 .filter-section {
     overflow-y: scroll;

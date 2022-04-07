@@ -31,6 +31,9 @@
     border: 1px solid var(--clr-grey-light);
     border-radius: var(--border-radius);
 }
+.header-search-form:focus-within {
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
 .nav-search-mobile .header-search-form {
     width: 95%;
     margin: var(--margin-sm) auto;
@@ -43,7 +46,6 @@
 }
 .header-search-form input:focus {
     outline: none;
-    background-color: var(--clr-white);
 }
 .nav-toggle-btn,
 .nav-search-mobile {

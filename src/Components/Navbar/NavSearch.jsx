@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { actionTypes } from "../../Context/actionTypes";
 import { useProduct } from "../../Context/ProductContext";
-const { RESET_PRODUCT_FILTERS } = actionTypes;
+const { RESET_PRODUCT_FILTERS, SEARCH_PRODUCTS } = actionTypes;
 export default function NavSearch() {
     const { productDispatchFun } = useProduct();
     const currentPage = useLocation();
@@ -10,7 +10,7 @@ export default function NavSearch() {
 
     function searchProductsFunction(e) {
         productDispatchFun({ type: RESET_PRODUCT_FILTERS });
-        productDispatchFun({ type: "SEARCH_PRODUCTS", payload: { searchValue: e.target.value } });
+        productDispatchFun({ type: SEARCH_PRODUCTS, payload: { searchValue: e.target.value } });
         if (currentPage.pathname !== "/products" && e.target.value?.trim()) {
             navigate("/products");
         }
@@ -28,9 +28,6 @@ export default function NavSearch() {
                 placeholder="Search..."
                 onChange={searchProductsFunction}
             />
-            <button type="button" className="btn-icon btn-icon-sm">
-                <i className="fas fa-search"></i>
-            </button>
         </form>
     );
 }

@@ -38,7 +38,7 @@
     font-size: 1rem;
 }
 /* media */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
     .nav-aside-wrapper.nav-aside-active,
     .nav-aside-content.nav-aside-active {
         display: flex;
