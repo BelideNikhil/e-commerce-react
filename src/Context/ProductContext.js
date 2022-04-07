@@ -12,8 +12,8 @@ const {
     ONE_DAY_DELIVERY,
     PRODUCTS_INITIAL_RENDER,
     RESET_PRODUCT_FILTERS,
+    SEARCH_PRODUCTS,
 } = actionTypes;
-const SEARCH_PRODUCTS = "SEARCH_PRODUCTS";
 const filters = {
     EXCLUDE_OUT_OF_STOCK: true,
     ONE_DAY_DELIVERY: false,

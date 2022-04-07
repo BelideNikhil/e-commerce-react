@@ -23,7 +23,7 @@ export default function FilterSection({ toggleFilter }) {
                         Filters<i className="fas fa-filter"></i>
                     </h3>
                     <button
-                        className="primary-accent clear-filter-btn"
+                        className="primary-accent clear-filter-btn pointer"
                         onClick={() => productDispatchFun({ type: RESET_PRODUCT_FILTERS })}
                     >
                         Clear
