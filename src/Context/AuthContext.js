@@ -89,6 +89,7 @@ function AuthProvider({ children }) {
         localStorage.removeItem("token");
         localStorage.removeItem("97xUserDetails");
         authDispatchFuntion({ type: "SET_AUTH_LOGOUT" });
+        navigate("/");
     };
     return (
         <AuthContext.Provider
