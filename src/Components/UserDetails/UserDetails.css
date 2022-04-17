@@ -1,0 +1,9 @@
+.user-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-details > * {
+    font-weight: var(--fw--semi-bold-500);
+}

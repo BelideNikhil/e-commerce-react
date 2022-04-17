@@ -8,6 +8,7 @@ const initialAuthState = {
     loginError: "",
     signupError: "",
     token: JSON.parse(localStorage.getItem("token")) || "",
+    userDetails: JSON.parse(localStorage.getItem("97xUserDetails")) || {},
 };
 
 function authReducerFunction(authState, { type, payload }) {
@@ -18,62 +19,75 @@ function authReducerFunction(authState, { type, payload }) {
                 loginError: "",
                 signupError: "",
                 token: payload.token,
+                userDetails: payload.userDetails,
             };
         case "SET_LOGIN_ERROR":
             return { ...authState, isAuth: payload.auth, loginError: payload.error };
         case "SET_SIGNUP_ERROR":
             return { ...authState, isAuth: payload.auth, signupError: payload.error };
         case "SET_AUTH_RENDER":
-            return { isAuth: payload.auth, token: payload.token, signupError: "", loginError: "" };
+            return {
+                isAuth: payload.auth,
+                token: payload.token,
+                signupError: "",
+                loginError: "",
+                userDetails: payload.foundUser,
+            };
         case "SET_AUTH_LOGOUT":
-            return { isAuth: false, token: "", signupError: "", loginError: "" };
+            return { isAuth: false, token: "", signupError: "", loginError: "", userDetails: {} };
         default:
             return authState;
     }
 }
-function localStorageSetter(status, data) {
-    if (status === 200 || status === 201) {
-        localStorage.setItem("token", JSON.stringify(data.encodedToken));
-        localStorage.setItem("isAuth", JSON.stringify(true));
-    } else {
-        localStorage.setItem("token", JSON.stringify(""));
-        localStorage.setItem("isAuth", JSON.stringify(false));
-    }
-}
+
 function AuthProvider({ children }) {
     const [authState, authDispatchFuntion] = useReducer(authReducerFunction, initialAuthState);
     const navigate = useNavigate();
+
     const userLoginHandler = async (userData) => {
         const { status, data } = await getLoginDetails(userData);
         if (status === 200) {
-            localStorageSetter(200, data);
             authDispatchFuntion({
                 type: "SET_AUTH",
-                payload: { auth: true, userData: data.foundUser, token: data.encodedToken },
+                payload: {
+                    auth: true,
+                    userDetails: data.foundUser,
+                    token: data.encodedToken,
+                },
             });
+
+            localStorage.setItem("token", JSON.stringify(data.encodedToken));
+            localStorage.setItem("isAuth", JSON.stringify(true));
+            localStorage.setItem("97xUserDetails", JSON.stringify(data.foundUser));
+
             navigate("/");
         } else {
-            localStorageSetter(status);
             authDispatchFuntion({ type: "SET_LOGIN_ERROR", payload: { auth: false, error: data.errors[0] } });
         }
     };
+
     const signupHandler = async (newUserData) => {
         const { status, data } = await getSignupDetails(newUserData);
         if (status === 201) {
-            localStorageSetter(status, data);
             authDispatchFuntion({
                 type: "SET_AUTH",
-                payload: { auth: true, token: data.encodedToken },
+                payload: { auth: true, token: data.encodedToken, userDetails: data.createdUser },
             });
+
+            localStorage.setItem("token", JSON.stringify(data.encodedToken));
+            localStorage.setItem("isAuth", JSON.stringify(true));
+            localStorage.setItem("97xUserDetails", JSON.stringify(data.createdUser));
+
             navigate("/");
         } else {
-            localStorageSetter(status);
             authDispatchFuntion({ type: "SET_SIGNUP_ERROR", payload: { auth: false, error: data.errors } });
         }
     };
+
     const logoutHandler = () => {
         localStorage.removeItem("isAuth");
         localStorage.removeItem("token");
+        localStorage.removeItem("97xUserDetails");
         authDispatchFuntion({ type: "SET_AUTH_LOGOUT" });
     };
     return (
