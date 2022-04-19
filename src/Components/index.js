@@ -10,6 +10,10 @@ import Loading from "./Loading/Loading";
 import ResetScrollbar from "./ResetScrollBar/ResetScrollBar";
 import ScrollToTop from "./ScrollToTop/ScrollToTop";
 import ToastWrapper from "./ToastWrapper/ToastWrapper";
+import UserDetails from "./UserDetails/UserDetails";
+import Orders from "./Orders/Orders";
+import AddressList from "./AddressList/AddressList";
+
 export {
     Navbar,
     NavAside,
@@ -23,4 +27,7 @@ export {
     ResetScrollbar,
     ScrollToTop,
     ToastWrapper,
+    UserDetails,
+    Orders,
+    AddressList,
 };

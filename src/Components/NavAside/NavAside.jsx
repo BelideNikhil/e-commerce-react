@@ -6,10 +6,12 @@ export default function NavAside({ navToggle, asideToggleFunction, setNavToggle 
         authState: { isAuth },
     } = useAuth();
     const navigate = useNavigate();
+
     function asideNavigate(navigateTo) {
         navigate(navigateTo);
         asideToggleFunction();
     }
+
     return (
         <div>
             <div
@@ -19,7 +21,7 @@ export default function NavAside({ navToggle, asideToggleFunction, setNavToggle 
             {navToggle ? (
                 <div className={`nav-aside-content flex-clmn-center-center ${navToggle ? "nav-aside-active" : ""}`}>
                     <div className="nav-aside-header flex-row-spc-btw">
-                        <button className="btn btn-outline-primary">
+                        <button className="btn btn-outline-primary" onClick={() => asideNavigate("/profile")}>
                             <i className="fas fa-user"></i>Profile
                         </button>
                         <button className="btn-icon nav-toggle-btn" onClick={asideToggleFunction}>

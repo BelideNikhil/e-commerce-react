@@ -64,10 +64,19 @@ export default function Navbar({ asideToggleFunction }) {
                             </div>
                         </li>
                         <li>
-                            <button className="btn-icon" onClick={isAuth ? logoutHandler : () => navigate("/login")}>
-                                <i className={`fas fa-sign-${isAuth ? "out" : "in"}-alt`}></i>
-                            </button>
+                            {isAuth ? (
+                                <Link to="/profile">
+                                    <button className="btn-icon">
+                                        <i className="fas fa-user-alt"></i>
+                                    </button>
+                                </Link>
+                            ) : (
+                                <button className="btn-icon" onClick={() => navigate("/login")}>
+                                    <i className={"fas fa-sign-in-alt"}></i>
+                                </button>
+                            )}
                         </li>
+                        <li></li>
                     </ul>
                 </nav>
             </header>
