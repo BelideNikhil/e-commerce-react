@@ -1,0 +1,12 @@
+.user-details-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-details > * {
+    font-weight: var(--fw--semi-bold-500);
+}
+
+.user-details-wrapper .avatar {
+    margin: 1rem auto;
+}
