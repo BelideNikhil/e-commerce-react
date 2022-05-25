@@ -17,3 +17,9 @@
     max-width: 34rem;
     margin: var(--margin-sm) 0;
 }
+.remove-coupon-btn {
+    border: 1px solid var(--clr-error);
+    border-radius: 1rem;
+    color: var(--clr-error);
+    padding: 0 var(--padding-md);
+}

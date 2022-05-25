@@ -8,7 +8,11 @@ import toast from "react-hot-toast";
 const CartContext = createContext();
 
 function CartProvider({ children }) {
-    const [cartState, cartDispatchFucntion] = useReducer(cartReducerFunction, { cartList: [] });
+    const [cartState, cartDispatchFucntion] = useReducer(cartReducerFunction, {
+        cartList: [],
+        couponValue: 0,
+        discountedPrice: 0,
+    });
     const { addToWishList } = useWishlist();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
@@ -16,6 +20,7 @@ function CartProvider({ children }) {
     const {
         authState: { isAuth, token },
     } = useAuth();
+
     function addToCartHandler(currentCard) {
         if (isAuth === true) {
             const toastId = toast.loading("Adding...");
