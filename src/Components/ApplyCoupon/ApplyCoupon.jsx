@@ -24,7 +24,8 @@ export default function ApplyCoupon({ setCouponModal, setCouponValue, couponData
                                     className="form-input mr-8"
                                     name="coupon"
                                     value={item.discount}
-                                    checked={couponValue === item.discount}
+                                    checked={couponValue === item.discount && finalPrice > item.maxPrice}
+                                    disabled={finalPrice < item.maxPrice}
                                     onChange={(e) => setCouponValue(Number(e.target.value))}
                                 />
                                 <div>
