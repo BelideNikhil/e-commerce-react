@@ -7,4 +7,5 @@ import Wishlist from "./Wishlist/Wishlist";
 import Profile from "./Profile/Profile";
 import NotFound from "./NotFound/NotFound";
 import SingleProduct from "./SingleProduct/SingleProduct";
-export { Home, Products, Login, Signup, Cart, Wishlist, Profile, NotFound, SingleProduct };
+import Checkout from "./Checkout/Checkout";
+export { Home, Products, Login, Signup, Cart, Wishlist, Profile, NotFound, SingleProduct, Checkout };
