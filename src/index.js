@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider, ProductProvider, CartProvider, WishlistProvider } from "./Context/";
+import { AuthProvider, ProductProvider, CartProvider, WishlistProvider, AddressProvider } from "./Context/";
 // Call make Server
 makeServer();
 
@@ -13,9 +13,11 @@ ReactDOM.render(
             <AuthProvider>
                 <WishlistProvider>
                     <CartProvider>
-                        <ProductProvider>
-                            <App />
-                        </ProductProvider>
+                        <AddressProvider>
+                            <ProductProvider>
+                                <App />
+                            </ProductProvider>
+                        </AddressProvider>
                     </CartProvider>
                 </WishlistProvider>
             </AuthProvider>
