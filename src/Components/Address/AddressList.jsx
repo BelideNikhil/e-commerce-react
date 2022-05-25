@@ -2,9 +2,12 @@ import { useState } from "react";
 import { useAddress } from "../../Context";
 import { AddressForm } from "../index";
 import Address from "./Address";
+import { Loading } from "../index";
 
 export default function AddressList() {
-    const { addressState } = useAddress();
+    const {
+        addressState: { isLoading, addressList },
+    } = useAddress();
     const [showAddressModal, setAddressModal] = useState(false);
 
     return (
@@ -15,11 +18,13 @@ export default function AddressList() {
                     <i className="fas fa-plus"></i>Add Address
                 </button>
             </div>
-            <div>
-                {addressState.addressList?.map((address) => {
+            {isLoading ? (
+                <Loading />
+            ) : (
+                addressList?.map((address) => {
                     return <Address address={address} key={address._id} />;
-                })}
-            </div>
+                })
+            )}
 
             {showAddressModal ? <AddressForm setAddressModal={setAddressModal} /> : null}
         </div>
