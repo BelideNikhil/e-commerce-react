@@ -12,6 +12,7 @@
     --z-index-6: 6; /*mobile filter buttons*/
     --z-index-10: 10; /* navbar*/
     --z-index-11: 11; /*nav aside*/
+    --z-index-12: 12;
 }
 .App {
     display: flex;
@@ -39,6 +40,12 @@
 }
 
 /* margin utils */
+.m-0 {
+    margin: 0;
+}
+.mt-4 {
+    margin-top: 4px;
+}
 .mt-8 {
     margin-top: 0.5rem;
 }
@@ -65,6 +72,9 @@
 }
 .mb-12 {
     margin-bottom: 0.75rem;
+}
+.mb-16 {
+    margin-bottom: 1rem;
 }
 .mx-8 {
     margin: 0.5rem 0;
@@ -121,7 +131,7 @@
 }
 
 .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: var(--fw--semi-bold-500);
     width: 100%;
     text-align: center;
@@ -208,6 +218,9 @@
 }
 .pointer {
     cursor: pointer;
+}
+.not-allowed {
+    cursor: not-allowed;
 }
 @media screen and (max-width: 500px) {
     .title {

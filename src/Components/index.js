@@ -12,7 +12,9 @@ import ScrollToTop from "./ScrollToTop/ScrollToTop";
 import ToastWrapper from "./ToastWrapper/ToastWrapper";
 import UserDetails from "./UserDetails/UserDetails";
 import Orders from "./Orders/Orders";
-import AddressList from "./AddressList/AddressList";
+import AddressList from "./Address/AddressList";
+import AddressForm from "./AddressForm/AddressForm";
+import ApplyCoupon from "./ApplyCoupon/ApplyCoupon";
 
 export {
     Navbar,
@@ -30,4 +32,6 @@ export {
     UserDetails,
     Orders,
     AddressList,
+    AddressForm,
+    ApplyCoupon,
 };
