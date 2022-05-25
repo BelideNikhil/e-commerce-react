@@ -2,9 +2,11 @@ import "./Checkout.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddress, useCart } from "../../Context";
+import { AddressForm } from "../../Components";
 
 export default function Checkout() {
     const [selectedAddress, setSelectedArress] = useState(null);
+    const [showAddressModal, setAddressModal] = useState(false);
     const navigate = useNavigate();
     const {
         addressState: { addressList },
@@ -54,6 +56,10 @@ export default function Checkout() {
                             </div>
                         );
                     })}
+                    <button className="btn btn-primary add-btn" onClick={() => setAddressModal(true)}>
+                        <i className="fas fa-plus"></i>Add Address
+                    </button>
+                    {showAddressModal ? <AddressForm setAddressModal={setAddressModal} /> : null}
                 </div>
                 <div className="checkout-summary pa-24">
                     <h4 className="mb-8 txt-center">Order Details</h4>
