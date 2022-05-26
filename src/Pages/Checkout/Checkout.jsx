@@ -1,8 +1,10 @@
 import "./Checkout.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAddress, useCart } from "../../Context";
+import { useAddress, useAuth, useCart, useOrders } from "../../Context";
 import { AddressForm } from "../../Components";
+import { loadScript } from "../../Helpers/loadScript";
+import { useDocumentTitle } from "../../CustomHooks/useDocumentTitle";
 
 export default function Checkout() {
     const [selectedAddress, setSelectedArress] = useState(null);
@@ -13,16 +15,61 @@ export default function Checkout() {
     } = useAddress();
 
     const {
-        cartState: { cartList, discountedPrice, couponValue },
+        authState: { token, userDetails },
+    } = useAuth();
+
+    const {
+        cartState: { cartList, grandTotal, deliveryCharge },
     } = useCart();
+
+    const { placeOrderHandler } = useOrders();
 
     useEffect(() => {
         if (addressList.length) {
             setSelectedArress(addressList[0]);
-        } else {
+        }
+        if (!cartList.length) {
             navigate("/products");
         }
-    }, [addressList]);
+    }, [addressList, cartList]);
+
+    useDocumentTitle("Checkout");
+
+    async function displayRazorpay() {
+        const response = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+
+        if (!response) {
+            alert("Razorpay SDK failed to load. Are you online?");
+            return;
+        }
+        const options = {
+            key: process.env.REACT_APP_RAZORPAY_KEY,
+            currency: "INR",
+            amount: String(grandTotal + deliveryCharge) * 100,
+            name: "Project 97X",
+            description: "Thank you for trusting us",
+            image: "/Assets/Images/favicon.webp",
+
+            handler: async function (response) {
+                const { razorpay_payment_id } = await response;
+                const orderData = {
+                    orderAmount: grandTotal + deliveryCharge,
+                    razorpayId: razorpay_payment_id,
+                    orderAddress: selectedAddress,
+                };
+                placeOrderHandler({ token, orderData });
+                navigate(`/order-summary/${razorpay_payment_id}`);
+            },
+            prefill: {
+                name: userDetails.firstName,
+                email: userDetails.email,
+                contact: "9898676721",
+            },
+        };
+
+        const paymentObject = new Razorpay(options);
+        paymentObject.open();
+    }
 
     return (
         <div>
@@ -81,11 +128,7 @@ export default function Checkout() {
                     <hr />
                     <div className="flex-row-spc-btw mb-8">
                         <b>Grand Total</b>
-                        <b>
-                            {couponValue
-                                ? Math.floor(discountedPrice - (discountedPrice * couponValue) / 100)
-                                : discountedPrice}
-                        </b>
+                        <b>{grandTotal + deliveryCharge}</b>
                     </div>
                     <hr />
                     <h4 className="mb-8 mt-8 txt-center">Deliver To</h4>
@@ -101,7 +144,9 @@ export default function Checkout() {
                             </div>
                         </div>
                     ) : null}
-                    <button className="btn btn-solid-primary w-100 m-0 mt-8">Place Order</button>
+                    <button className="btn btn-solid-primary w-100 m-0 mt-8" onClick={displayRazorpay}>
+                        Place Order
+                    </button>
                 </div>
             </div>
         </div>
