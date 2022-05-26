@@ -2,6 +2,7 @@ import "./Orders.css";
 import { useEffect } from "react";
 import { useAuth, useOrders } from "../../Context";
 import { Loading } from "../index";
+import { useNavigate } from "react-router-dom";
 
 export default function Orders() {
     const {
@@ -11,6 +12,8 @@ export default function Orders() {
         getOrdersList,
         orderState: { ordersList, isLoading },
     } = useOrders();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getOrdersList(token);
