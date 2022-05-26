@@ -41,13 +41,17 @@ export default function Footer() {
                 <h2>Account</h2>
                 <div>
                     <Link to="/profile">
-                        <button className="mb-12 primary-accent">My Account</button>
+                        <button className="mb-12 primary-accent pointer">My Account</button>
                     </Link>
                     <Link to="/wishlist">
-                        <button className="mb-12 primary-accent">Wishlist</button>
+                        <button className="mb-12 primary-accent pointer">Wishlist</button>
                     </Link>
-                    <button className="mb-12 primary-accent">Manage Address</button>
-                    <button className="mb-12 primary-accent">Privacy Policy</button>
+                    <Link to="/profile/address">
+                        <button className="mb-12 primary-accent pointer">Manage Address</button>
+                    </Link>
+                    <Link to="/profile/orders">
+                        <button className="mb-12 primary-accent pointer">Orders</button>
+                    </Link>
                 </div>
             </div>
             <div className="footer-content-wrapper contact-us">
