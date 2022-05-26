@@ -1,0 +1,6 @@
+.order-card {
+    box-shadow: var(--box-shadow-light);
+    margin: 0.5rem;
+    border-radius: var(--border-radius);
+    padding: var(--padding-md);
+}
