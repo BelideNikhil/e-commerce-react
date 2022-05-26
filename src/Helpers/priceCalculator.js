@@ -10,11 +10,11 @@ export function priceCalculator(cartList, couponValue) {
             0
         )
     );
-    const gstTotal = Math.round((discountedPrice / 100) * 18);
-
     const couponDiscount = Math.ceil((discountedPrice * couponValue) / 100);
 
-    const grandTotal = actualPrice - discountedPrice + couponDiscount;
+    const grandTotal = discountedPrice - couponDiscount;
 
-    return { discountedPrice, actualPrice, gstTotal, couponDiscount, grandTotal };
+    const deliveryCharge = grandTotal > 1000 ? 0 : 100;
+
+    return { discountedPrice, actualPrice, couponDiscount, grandTotal, deliveryCharge };
 }

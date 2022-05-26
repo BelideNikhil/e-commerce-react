@@ -56,3 +56,9 @@ export const addressFormErrorActionTypes = {
     SET_NUMBER_ERROR: "SET_NUMBER_ERROR",
     RESET_ERRORS: "RESET_ERRORS",
 };
+
+export const orderActionTypes = {
+    SET_LOADING: "SET_LOADING",
+    SET_ERROR: "SET_ERROR",
+    SET_ORDERS_LIST: "SET_ORDERS_LIST",
+};
