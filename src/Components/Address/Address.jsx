@@ -2,6 +2,7 @@ import "./Address.css";
 import { useState } from "react";
 import { useAddress, useAuth } from "../../Context";
 import { AddressForm } from "../index";
+import { useDocumentTitle } from "../../CustomHooks/useDocumentTitle";
 
 export default function Address({ address }) {
     const { deleteUserAddress } = useAddress();
@@ -9,6 +10,8 @@ export default function Address({ address }) {
     const {
         authState: { token },
     } = useAuth();
+    
+    useDocumentTitle("Address");
 
     return (
         <>

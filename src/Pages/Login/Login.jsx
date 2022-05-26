@@ -1,20 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import { useDocumentTitle } from "../../CustomHooks/useDocumentTitle";
 
-const guestUser = { email: "adarshbalika@gmail.com", password: "adarshbalika" };
+const guestUser = { email: "nikhil@gmail.com", password: "password123" };
 const initialUser = { email: "", password: "" };
 
 export default function Login() {
     const [userData, setUserData] = useState(initialUser);
     const { userLoginHandler, authState } = useAuth();
     const [togglePassword, setTogglePassword] = useState(false);
+
     function loginFormHandler(e) {
         e.preventDefault();
         if (userData.email && userData.password) {
             userLoginHandler(userData);
         }
     }
+
+    useDocumentTitle("Login");
+
     return (
         <div className="main-container flex-clmn-center-center">
             <h2>LOGIN</h2>
@@ -71,7 +76,7 @@ export default function Login() {
                     ) : null}
                     <div>
                         <Link to="/signup">
-                            <button className="primary-accent" style={{ fontWeight: "600", cursor:"pointer"}}>
+                            <button className="primary-accent" style={{ fontWeight: "600", cursor: "pointer" }}>
                                 <span>Create an account Instead? </span>
                             </button>
                         </Link>

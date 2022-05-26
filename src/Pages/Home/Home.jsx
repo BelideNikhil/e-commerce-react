@@ -1,5 +1,8 @@
+import { useDocumentTitle } from "../../CustomHooks/useDocumentTitle";
 import { Categories, HeroSection, Featured } from "../../Components";
+
 export default function Home() {
+    useDocumentTitle("HOME");
     return (
         <>
             <HeroSection />
