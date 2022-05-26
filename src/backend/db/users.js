@@ -15,6 +15,16 @@ export const users = [
         password: "adarshbalika",
         createdAt: formatDate(),
         updatedAt: formatDate(),
+        address: [],
+    },
+    {
+        _id: uuid(),
+        firstName: "Nikhil",
+        lastName: "Belide",
+        email: "nikhil@gmail.com",
+        password: "password123",
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
         address: [
             {
                 locality: "106, Green City Colony, Banjara Hills",
@@ -23,7 +33,7 @@ export const users = [
                 pincode: "500011",
                 city: "Hyderabad",
                 phoneNumber: "9876543210",
-                name: "Adarsh",
+                name: "Nikhil",
                 _id: uuid(),
             },
             {
@@ -33,19 +43,9 @@ export const users = [
                 pincode: "500009",
                 city: "Pune",
                 phoneNumber: "9876543210",
-                name: "Balika",
+                name: "Xavier",
                 _id: uuid(),
             },
         ],
-    },
-    {
-        _id: uuid(),
-        firstName: "Nikhil",
-        lastName: "belide",
-        email: "test@gmail.com",
-        password: "password123",
-        createdAt: formatDate(),
-        updatedAt: formatDate(),
-        address: [],
     },
 ];
