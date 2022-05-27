@@ -80,26 +80,29 @@ export default function Checkout() {
                     {addressList?.map((address) => {
                         return (
                             <div className="address mb-8 pa-12" key={address._id}>
-                                <label className="flex-row-start-center">
-                                    <input
-                                        type="radio"
-                                        name="address"
-                                        className="mr-8"
-                                        checked={selectedAddress === address}
-                                        onChange={() => setSelectedArress(address)}
-                                    />
-                                    <div className="address-title mt-4">{address.name}</div>
+                                <label>
+                                    <div className="flex-row-start-center">
+                                        <input
+                                            type="radio"
+                                            name="address"
+                                            className="mr-8"
+                                            checked={selectedAddress === address}
+                                            onChange={() => setSelectedArress(address)}
+                                        />
+                                        <div className="address-title mt-4">{address.name}</div>
+                                    </div>
+
+                                    <div className="address-text">{address.locality}</div>
+                                    <div>
+                                        <span className="address-text">{address.city}, </span>
+                                        <span className="address-text">{address.pincode}</span>
+                                    </div>
+                                    <div>
+                                        <span className="address-text">India, </span>
+                                        <span className="address-text">{address.state}</span>
+                                    </div>
+                                    <div className="address-text">Phone: {address.phoneNumber}</div>
                                 </label>
-                                <div className="address-text">{address.locality}</div>
-                                <div>
-                                    <span className="address-text">{address.city}, </span>
-                                    <span className="address-text">{address.pincode}</span>
-                                </div>
-                                <div>
-                                    <span className="address-text">India, </span>
-                                    <span className="address-text">{address.state}</span>
-                                </div>
-                                <div className="address-text">Phone: {address.phoneNumber}</div>
                             </div>
                         );
                     })}
@@ -128,7 +131,10 @@ export default function Checkout() {
                     <hr />
                     <div className="flex-row-spc-btw mb-8">
                         <b>Grand Total</b>
-                        <b>{grandTotal + deliveryCharge}</b>
+                        <b>
+                            <i className="fas fa-rupee-sign"></i>
+                            {grandTotal + deliveryCharge}
+                        </b>
                     </div>
                     <hr />
                     <h4 className="mb-8 mt-8 txt-center">Deliver To</h4>
