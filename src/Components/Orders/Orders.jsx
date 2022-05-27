@@ -21,7 +21,7 @@ export default function Orders() {
     }, []);
 
     return (
-        <div className="pa-24">
+        <div className="orders-wrapper">
             {isLoading ? (
                 <Loading />
             ) : ordersList?.length > 0 ? (

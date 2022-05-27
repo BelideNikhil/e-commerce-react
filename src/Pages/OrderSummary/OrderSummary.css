@@ -52,3 +52,16 @@
         height: 12rem;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .order-summary-wrapper {
+        width: 95%;
+    }
+    .order-summary-card {
+        grid-template-columns: 1fr 1fr;
+        height: 10rem;
+    }
+    .order-summary-card img {
+        height: 10rem;
+    }
+}
