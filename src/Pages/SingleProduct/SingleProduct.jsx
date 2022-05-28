@@ -2,6 +2,8 @@ import "./SingleProduct.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProduct, useWishlist, useCart, useAuth } from "../../Context";
 import { Loading } from "../../Components";
+import { useDocumentTitle } from "../../CustomHooks/useDocumentTitle";
+
 export default function SingleProduct() {
     const {
         productState: { prodList },
@@ -19,12 +21,15 @@ export default function SingleProduct() {
     const {
         authState: { isAuth },
     } = useAuth();
+
     const { id: productId } = useParams();
+    const navigate = useNavigate();
+
     const product = prodList?.find((each) => each.id === productId);
     const foundInCart = cartList?.find((each) => each._id === product._id);
     const foundInWishlist = wishList?.find((each) => each._id === product._id);
-    const navigate = useNavigate();
 
+    useDocumentTitle(product?.title);
     return (
         <>
             {product ? (

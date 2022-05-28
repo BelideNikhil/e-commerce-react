@@ -15,6 +15,9 @@ import Orders from "./Orders/Orders";
 import AddressList from "./Address/AddressList";
 import AddressForm from "./AddressForm/AddressForm";
 import ApplyCoupon from "./ApplyCoupon/ApplyCoupon";
+import CartCard from "./CartCard/CartCard";
+import CartSummary from "./CartSummary/CartSummary";
+import WishlistCard from "./WishlistCard/WishlistCard";
 
 export {
     Navbar,
@@ -34,4 +37,7 @@ export {
     AddressList,
     AddressForm,
     ApplyCoupon,
+    CartSummary,
+    CartCard,
+    WishlistCard,
 };

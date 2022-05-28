@@ -1,14 +1,11 @@
 import "./Navbar.css";
-import "../../utils.css";
 import { Link, useNavigate } from "react-router-dom";
 import NavSearch from "./NavSearch";
-import { useAuth } from "../../Context/AuthContext";
-import { useCart } from "../../Context/CartContext";
-import { useWishlist } from "../../Context/WishlistContext";
+import { useAuth, useCart, useWishlist } from "../../Context";
+
 export default function Navbar({ asideToggleFunction }) {
     const {
         authState: { isAuth },
-        logoutHandler,
     } = useAuth();
     const {
         cartState: { cartList },
@@ -17,6 +14,7 @@ export default function Navbar({ asideToggleFunction }) {
         wishlistState: { wishList },
     } = useWishlist();
     const navigate = useNavigate();
+
     return (
         <div className="header-wrapper pa-8 ">
             <header className="header pa-8 flex-row-spc-btw">

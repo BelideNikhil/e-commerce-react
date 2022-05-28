@@ -1,7 +1,9 @@
 import "./Profile.css";
 import { NavLink, Outlet } from "react-router-dom";
+import { useDocumentTitle } from "../../CustomHooks/useDocumentTitle";
 
 export default function Profile() {
+    useDocumentTitle("Profile");
     return (
         <>
             <div className="title">Account Details</div>

@@ -20,15 +20,27 @@ export default function CartSummary() {
         cartDispatchFucntion,
     } = useCart();
 
-    const { discountedPrice, actualPrice, couponDiscount, grandTotal } = priceCalculator(cartList, couponValue);
+    const { discountedPrice, actualPrice, couponDiscount, grandTotal, deliveryCharge } = priceCalculator(
+        cartList,
+        couponValue
+    );
 
     useEffect(() => {
         if (!cartList.length) {
             setCouponValue(0);
         }
 
-        cartDispatchFucntion({ type: "SET_PRICE", payload: { discountedPrice, couponValue } });
+        cartDispatchFucntion({
+            type: "SET_PRICE",
+            payload: { discountedPrice, couponValue, grandTotal, deliveryCharge },
+        });
     }, [cartList, discountedPrice, couponValue]);
+
+    useEffect(() => {
+        if (discountedPrice < 1500 || discountedPrice < 2500) {
+            setCouponValue(0);
+        }
+    }, [discountedPrice]);
 
     return (
         <>
@@ -51,7 +63,10 @@ export default function CartSummary() {
                         <hr />
                         <div className="flex-row-spc-btw">
                             <div>
-                                Cart Total <strong>( {cartList?.length} Items)</strong>
+                                Cart Total
+                                <strong>
+                                    ( {cartList?.length} {cartList?.length > 1 ? "Items" : "Item"})
+                                </strong>
                             </div>
                             <div>
                                 <i className="fas fa-rupee-sign"></i>
@@ -69,7 +84,7 @@ export default function CartSummary() {
                         <div className="flex-row-spc-btw">
                             <div>Shipping Charges</div>
                             <div className="secondary-accent">
-                                {discountedPrice > 500 ? (
+                                {discountedPrice > 1000 ? (
                                     "FREE"
                                 ) : (
                                     <div>
@@ -111,7 +126,9 @@ export default function CartSummary() {
                                 </div>
                             </>
                         ) : null}
-                        <div className="txt-right w-100">You save ₹ {grandTotal} on this order</div>
+                        <div className="txt-right w-100">
+                            You save ₹ {actualPrice - discountedPrice + couponDiscount} on this order
+                        </div>
                     </div>
                     <button className="btn btn-solid-primary" onClick={() => navigate("/checkout")}>
                         Checkout

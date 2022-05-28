@@ -31,7 +31,10 @@ export default function FilterSection({ toggleFilter }) {
                 </div>
                 <hr></hr>
                 <div className="filter-content">
-                    <h4 className="filter-header">Price</h4>
+                    <h4 className="filter-header">
+                        Price - <i className="fas fa-rupee-sign"></i>
+                        {filters.SLIDER_PRICE_VALUE}
+                    </h4>
                     <div className="flex-row-spc-btw">
                         <div>
                             <i className="fas fa-rupee-sign"></i>99

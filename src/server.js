@@ -19,6 +19,9 @@ import {
     removeAddressHandler,
     editAddressHandler,
 } from "./backend/controllers/AddressController";
+
+import { placeOrderHandler, getOrdersHandler } from "./backend/controllers/OrderController";
+
 import { categories } from "./backend/db/categories";
 import { products } from "./backend/db/products";
 import { users } from "./backend/db/users";
@@ -35,6 +38,7 @@ export function makeServer({ environment = "development" } = {}) {
             user: Model,
             cart: Model,
             wishlist: Model,
+            orders: Model,
         },
 
         // Runs on the start of the server
@@ -45,7 +49,7 @@ export function makeServer({ environment = "development" } = {}) {
                 server.create("product", { ...item });
             });
 
-            users.forEach((item) => server.create("user", { ...item, cart: [], wishlist: [] }));
+            users.forEach((item) => server.create("user", { ...item, cart: [], wishlist: [], orders: [] }));
 
             categories.forEach((item) => server.create("category", { ...item }));
         },
@@ -80,6 +84,10 @@ export function makeServer({ environment = "development" } = {}) {
             this.post("/user/address", addNewAddressHandler.bind(this));
             this.post("/user/address/edit/:addressId", editAddressHandler.bind(this));
             this.delete("/user/address/:addressId", removeAddressHandler.bind(this));
+
+            // orders
+            this.get("/user/orders/", getOrdersHandler.bind(this));
+            this.post("/user/orders/", placeOrderHandler.bind(this));
         },
     });
 }

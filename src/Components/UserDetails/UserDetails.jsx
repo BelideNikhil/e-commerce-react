@@ -1,11 +1,14 @@
 import "./UserDetails.css";
 import { useAuth } from "../../Context/AuthContext";
+import { useDocumentTitle } from "../../CustomHooks/useDocumentTitle";
 
 export default function UserDetails() {
     const {
         authState: { userDetails },
         logoutHandler,
     } = useAuth();
+
+    useDocumentTitle("Profile");
 
     return (
         <div className="user-details-wrapper pa-24 w-100">

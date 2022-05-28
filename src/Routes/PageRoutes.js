@@ -1,5 +1,17 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Home, Products, Login, Signup, Cart, Wishlist, Profile, NotFound, SingleProduct, Checkout } from "../Pages";
+import {
+    Home,
+    Products,
+    Login,
+    Signup,
+    Cart,
+    Wishlist,
+    Profile,
+    NotFound,
+    SingleProduct,
+    Checkout,
+    OrderSummary,
+} from "../Pages";
 import { ResetScrollbar, AddressList, Orders, UserDetails } from "../Components/";
 import PrivateRoute from "./PrivateRoute";
 import { useAuth } from "../Context/AuthContext";
@@ -20,6 +32,7 @@ export default function PageRoutes() {
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/wishlist" element={<Wishlist />} />
                         <Route path="/checkout" element={<Checkout />} />
+                        <Route path="/order-summary/:orderId" element={<OrderSummary />} />
 
                         <Route path="/profile" element={<Profile />}>
                             <Route path="" element={<UserDetails />} />

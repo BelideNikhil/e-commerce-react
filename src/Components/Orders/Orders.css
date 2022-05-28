@@ -1,0 +1,15 @@
+.orders-wrapper {
+    padding: var(--padding-large);
+}
+.order-card {
+    box-shadow: var(--box-shadow-light);
+    margin: 0.5rem;
+    border-radius: var(--border-radius);
+    padding: var(--padding-md);
+}
+
+@media screen and (max-width: 600px) {
+    .orders-wrapper {
+        padding: var(--padding-md);
+    }
+}

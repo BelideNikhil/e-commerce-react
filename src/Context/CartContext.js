@@ -10,8 +10,6 @@ const CartContext = createContext();
 function CartProvider({ children }) {
     const [cartState, cartDispatchFucntion] = useReducer(cartReducerFunction, {
         cartList: [],
-        couponValue: 0,
-        discountedPrice: 0,
     });
     const { addToWishList } = useWishlist();
     const [isLoading, setIsLoading] = useState(false);

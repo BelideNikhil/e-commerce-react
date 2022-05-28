@@ -1,8 +1,10 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
 import { actionTypes } from "../../Context/actionTypes";
 import { useProduct } from "../../Context/ProductContext";
+import { debounce } from "../../Helpers/debounce";
+
 const { RESET_PRODUCT_FILTERS, SEARCH_PRODUCTS } = actionTypes;
+
 export default function NavSearch() {
     const { productDispatchFun } = useProduct();
     const currentPage = useLocation();
@@ -15,6 +17,7 @@ export default function NavSearch() {
             navigate("/products");
         }
     }
+
     return (
         <form
             className="header-search-form flex-row-start-center"
@@ -26,7 +29,7 @@ export default function NavSearch() {
                 type="search"
                 className="search-input pa-8"
                 placeholder="Search..."
-                onChange={searchProductsFunction}
+                onChange={debounce(searchProductsFunction)}
             />
         </form>
     );

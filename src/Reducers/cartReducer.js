@@ -7,8 +7,7 @@ export function cartReducerFunction(cartState, { type, payload }) {
         case "SET_PRICE":
             return {
                 ...cartState,
-                discountedPrice: payload.discountedPrice,
-                couponValue: payload.couponValue,
+                ...payload,
             };
         default:
             return cartState;

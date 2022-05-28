@@ -4,6 +4,7 @@ import { useAuth } from "../../Context/AuthContext";
 import { signupErrorActionTypes, signupUserActiontypes } from "../../Context/actionTypes";
 import { signupFormValidator } from "./SignupValidator";
 import { signupErrorReducer, SignupUserReducer } from "../../Reducers";
+import { useDocumentTitle } from "../../CustomHooks/useDocumentTitle";
 const { RESET_SIGNUP_ERRORS } = signupErrorActionTypes;
 const {
     SET_FIRSTNAME,
@@ -27,6 +28,7 @@ export default function Signup() {
     const [signupErrState, signupErrorDispatch] = useReducer(signupErrorReducer, initialSignUpError);
     const [signupUserState, signupUserDispatch] = useReducer(SignupUserReducer, initialNewUser);
     const { authState, signupHandler } = useAuth();
+    useDocumentTitle("Sign Up");
 
     function signupFormSubmitHandler(e) {
         e.preventDefault();

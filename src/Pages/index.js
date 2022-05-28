@@ -8,4 +8,5 @@ import Profile from "./Profile/Profile";
 import NotFound from "./NotFound/NotFound";
 import SingleProduct from "./SingleProduct/SingleProduct";
 import Checkout from "./Checkout/Checkout";
-export { Home, Products, Login, Signup, Cart, Wishlist, Profile, NotFound, SingleProduct, Checkout };
+import OrderSummary from "./OrderSummary/OrderSummary";
+export { Home, Products, Login, Signup, Cart, Wishlist, Profile, NotFound, SingleProduct, Checkout, OrderSummary };
